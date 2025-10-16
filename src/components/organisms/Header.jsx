@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
 import { cn } from "@/utils/cn";
+import { useAuth } from "@/layouts/Root";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { logout } = useAuth();
 
   const navigationItems = [
     { name: "Home", href: "/" },
@@ -42,7 +46,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+<nav className="hidden md:flex items-center space-x-8">
             {navigationItems.map((item) => (
               <Link
                 key={item.name}
@@ -62,7 +66,6 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="outline" onClick={() => navigate("/jobs")}>
               Find Jobs
@@ -70,6 +73,12 @@ const Header = () => {
             <Button variant="primary" onClick={handlePostJob}>
               Post Job
             </Button>
+            {isAuthenticated && (
+              <Button variant="ghost" onClick={logout}>
+                <ApperIcon name="LogOut" className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -82,7 +91,7 @@ const Header = () => {
       </div>
 
       {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
+{isMobileMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
             {navigationItems.map((item) => (
@@ -121,6 +130,19 @@ const Header = () => {
               >
                 Post Job
               </Button>
+              {isAuthenticated && (
+                <Button 
+                  variant="ghost" 
+                  className="w-full"
+                  onClick={() => {
+                    logout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  <ApperIcon name="LogOut" className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
+              )}
             </div>
           </div>
         </div>

@@ -52,42 +52,41 @@ const Jobs = () => {
 
     // Apply search filter
     if (searchQuery) {
-      filtered = filtered.filter(job =>
-        job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        job.description.toLowerCase().includes(searchQuery.toLowerCase())
+filtered = filtered.filter(job =>
+        job.title_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.company_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.description_c?.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    // Apply filters
     if (filters.location) {
       filtered = filtered.filter(job =>
-        job.location.toLowerCase().includes(filters.location.toLowerCase())
+        job.location_c?.toLowerCase().includes(filters.location.toLowerCase())
       );
     }
 
     if (filters.jobType) {
-      filtered = filtered.filter(job => job.jobType === filters.jobType);
+      filtered = filtered.filter(job => job.job_type_c === filters.jobType);
     }
 
     if (filters.experienceLevel) {
-      filtered = filtered.filter(job => job.experienceLevel === filters.experienceLevel);
+      filtered = filtered.filter(job => job.experience_level_c === filters.experienceLevel);
     }
 
     if (filters.industry) {
-      filtered = filtered.filter(job => job.industry === filters.industry);
+      filtered = filtered.filter(job => job.industry_c === filters.industry);
     }
 
     if (filters.minSalary) {
       filtered = filtered.filter(job => {
-        const salaryNumber = parseInt(job.salaryRange.replace(/[^0-9]/g, ""));
+        const salaryNumber = parseInt(job.salary_range_c?.replace(/[^0-9]/g, "") || "0");
         return salaryNumber >= parseInt(filters.minSalary);
       });
     }
 
     if (filters.maxSalary) {
       filtered = filtered.filter(job => {
-        const salaryNumber = parseInt(job.salaryRange.replace(/[^0-9]/g, ""));
+        const salaryNumber = parseInt(job.salary_range_c?.replace(/[^0-9]/g, "") || "0");
         return salaryNumber <= parseInt(filters.maxSalary);
       });
     }

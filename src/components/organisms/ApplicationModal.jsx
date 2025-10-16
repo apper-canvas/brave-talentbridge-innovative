@@ -103,14 +103,14 @@ const ApplicationModal = ({ isOpen, onClose, onSubmit, job }) => {
       setLoading(true);
 
       const applicationData = {
-        jobId: job.Id.toString(),
-        candidateName: formData.candidateName.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        coverLetter: formData.coverLetter.trim(),
-        resumeUrl: `uploads/resumes/${formData.resumeFile.name}`, // Simulated file path
-        status: "submitted",
-        submittedDate: new Date().toISOString()
+job_id_c: job.Id,
+        candidate_name_c: formData.fullName,
+        email_c: formData.email,
+        phone_c: formData.phone,
+        resume_url_c: formData.resume,
+        cover_letter_c: formData.coverLetter,
+        status_c: "submitted",
+        submitted_date_c: new Date().toISOString()
       };
 
       await applicationService.create(applicationData);
@@ -158,9 +158,9 @@ const ApplicationModal = ({ isOpen, onClose, onSubmit, job }) => {
         <div className="flex justify-between items-center p-6 border-b border-gray-200">
           <div>
             <h2 className="text-xl font-bold text-gray-900">
-              Apply for {job?.title}
+Apply for {job?.title_c}
             </h2>
-            <p className="text-gray-600">{job?.company} • {job?.location}</p>
+            <p className="text-gray-600">{job?.company_c} • {job?.location_c}</p>
           </div>
           <button
             onClick={handleClose}
@@ -273,7 +273,7 @@ const ApplicationModal = ({ isOpen, onClose, onSubmit, job }) => {
                   Application Submitted!
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Thank you for your interest in the {job?.title} position at {job?.company}. 
+Thank you for your interest in the {job?.title_c} position at {job?.company_c}. 
                   We've received your application and will review it carefully.
                 </p>
               </div>

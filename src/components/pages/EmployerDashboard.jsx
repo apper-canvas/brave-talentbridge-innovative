@@ -61,18 +61,18 @@ const EmployerDashboard = () => {
   };
 
   const getJobApplications = (jobId) => {
-    return applications.filter(app => parseInt(app.jobId) === jobId);
+return applications.filter(app => app.job_id_c?.Id === jobId);
   };
 
   const getJobShortlistRequests = (jobId) => {
-    return shortlistRequests.filter(req => parseInt(req.jobId) === jobId);
+    return shortlistRequests.filter(req => req.job_id_c?.Id === jobId);
   };
 
   const stats = {
     totalJobs: jobs.length,
-    activeJobs: jobs.filter(job => job.status === "active").length,
+    activeJobs: jobs.filter(job => job.status_c === "active").length,
     totalApplications: applications.length,
-    pendingRequests: shortlistRequests.filter(req => req.status === "pending").length
+    pendingRequests: shortlistRequests.filter(req => req.status_c === "pending").length
   };
 
   if (loading) {
@@ -196,7 +196,7 @@ const EmployerDashboard = () => {
           {jobs.length > 0 ? (
             <div className="space-y-6">
               {jobs.map((job) => {
-                const jobApplications = getJobApplications(job.Id);
+const jobApplications = getJobApplications(job.Id);
                 const jobShortlistRequests = getJobShortlistRequests(job.Id);
 
                 return (
@@ -205,29 +205,29 @@ const EmployerDashboard = () => {
                       <div className="flex-1">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
                           <h3 className="text-lg font-semibold text-gray-900 mb-2 sm:mb-0">
-                            {job.title}
+                            {job.title_c}
                           </h3>
-                          <Badge variant={job.status === "active" ? "success" : "default"}>
-                            {job.status}
+                          <Badge variant={job.status_c === "active" ? "success" : "default"}>
+                            {job.status_c}
                           </Badge>
                         </div>
                         
                         <div className="flex flex-wrap items-center text-gray-600 text-sm mb-3 gap-4">
                           <div className="flex items-center">
                             <ApperIcon name="MapPin" className="h-4 w-4 mr-1" />
-                            {job.location}
+                            {job.location_c}
                           </div>
                           <div className="flex items-center">
                             <ApperIcon name="Briefcase" className="h-4 w-4 mr-1" />
-                            {job.jobType}
+                            {job.job_type_c}
                           </div>
                           <div className="flex items-center">
                             <ApperIcon name="DollarSign" className="h-4 w-4 mr-1" />
-                            {job.salaryRange}
+                            {job.salary_range_c}
                           </div>
                           <div className="flex items-center">
                             <ApperIcon name="Calendar" className="h-4 w-4 mr-1" />
-                            Posted {formatDistanceToNow(new Date(job.postedDate), { addSuffix: true })}
+                            Posted {formatDistanceToNow(new Date(job.posted_date_c), { addSuffix: true })}
                           </div>
                         </div>
 
@@ -305,27 +305,27 @@ const EmployerDashboard = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {applications.slice(0, 10).map((application) => {
-                      const job = jobs.find(j => j.Id === parseInt(application.jobId));
+{applications.slice(0, 10).map((application) => {
+                      const job = jobs.find(j => j.Id === application.job_id_c?.Id);
                       
                       return (
                         <tr key={application.Id} className="hover:bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div>
                               <div className="text-sm font-medium text-gray-900">
-                                {application.candidateName}
+                                {application.candidate_name_c}
                               </div>
                               <div className="text-sm text-gray-500">
-                                {application.email}
+                                {application.email_c}
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4">
                             <div className="text-sm text-gray-900">
-                              {job ? job.title : "Unknown Job"}
+                              {job ? job.title_c : application.job_id_c?.Name || "Unknown Job"}
                             </div>
                             <div className="text-sm text-gray-500">
-                              {job ? job.company : ""}
+                              {job ? job.company_c : ""}
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

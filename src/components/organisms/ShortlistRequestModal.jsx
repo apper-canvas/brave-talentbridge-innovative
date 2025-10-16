@@ -81,13 +81,13 @@ const ShortlistRequestModal = ({ isOpen, onClose, onSubmit, jobId, jobs }) => {
 
       const requestData = {
         employerId: "1", // Simulated employer ID
-        jobId: formData.jobId,
-        criteria: formData.criteria.trim(),
-        numberOfCandidates: parseInt(formData.numberOfCandidates),
-        urgency: formData.urgency,
-        additionalNotes: formData.additionalNotes.trim(),
-        status: "pending",
-        requestDate: new Date().toISOString()
+job_id_c: formData.jobId,
+        criteria_c: formData.criteria,
+        number_of_candidates_c: parseInt(formData.numberOfCandidates),
+        urgency_c: formData.urgency,
+        additional_notes_c: formData.additionalNotes,
+        status_c: "pending",
+        request_date_c: new Date().toISOString()
       };
 
       await shortlistService.create(requestData);
@@ -164,21 +164,21 @@ const ShortlistRequestModal = ({ isOpen, onClose, onSubmit, jobId, jobs }) => {
               onChange={handleInputChange}
               error={errors.jobId}
               options={jobs.map(job => ({
-                value: job.Id.toString(),
-                label: `${job.title} - ${job.company}`
+value: job.Id.toString(),
+                label: `${job.title_c} - ${job.company_c}`
               }))}
-              placeholder="Choose a job posting"
+              error={errors.jobId}
             />
 
             {selectedJob && (
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h4 className="font-medium text-gray-900 mb-2">Selected Position:</h4>
-                <div className="text-sm text-gray-600 space-y-1">
-                  <div><strong>Title:</strong> {selectedJob.title}</div>
-                  <div><strong>Company:</strong> {selectedJob.company}</div>
-                  <div><strong>Location:</strong> {selectedJob.location}</div>
-                  <div><strong>Job Type:</strong> {selectedJob.jobType}</div>
-                  <div><strong>Experience Level:</strong> {selectedJob.experienceLevel}</div>
+              <div className="bg-gray-50 p-4 rounded-lg text-sm">
+                <div className="font-semibold mb-2">Job Details:</div>
+                <div className="space-y-1 text-gray-600">
+                  <div><strong>Title:</strong> {selectedJob.title_c}</div>
+                  <div><strong>Company:</strong> {selectedJob.company_c}</div>
+                  <div><strong>Location:</strong> {selectedJob.location_c}</div>
+                  <div><strong>Job Type:</strong> {selectedJob.job_type_c}</div>
+                  <div><strong>Experience Level:</strong> {selectedJob.experience_level_c}</div>
                 </div>
               </div>
             )}

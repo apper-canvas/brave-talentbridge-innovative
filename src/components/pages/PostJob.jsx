@@ -123,19 +123,19 @@ const PostJob = () => {
     try {
       setLoading(true);
 
-      const jobData = {
-        title: formData.title.trim(),
-        company: formData.company.trim(),
-        location: formData.location.trim(),
-        jobType: formData.jobType,
-        experienceLevel: formData.experienceLevel,
-        industry: formData.industry,
-        salaryRange: formData.salaryRange.trim(),
-        description: formData.description.trim(),
-        requirements: formData.requirements.split('\n').filter(req => req.trim()).map(req => req.trim()),
-        benefits: formData.benefits ? formData.benefits.split('\n').filter(benefit => benefit.trim()).map(benefit => benefit.trim()) : [],
-        status: "active",
-        postedDate: new Date().toISOString()
+const jobData = {
+        title_c: formData.title.trim(),
+        company_c: formData.company.trim(),
+        location_c: formData.location.trim(),
+        job_type_c: formData.jobType,
+        experience_level_c: formData.experienceLevel,
+        industry_c: formData.industry,
+        salary_range_c: formData.salaryRange.trim(),
+        description_c: formData.description.trim(),
+        requirements_c: formData.requirements.split('\n').filter(req => req.trim()).join('\n'),
+        benefits_c: formData.benefits ? formData.benefits.split('\n').filter(benefit => benefit.trim()).join('\n') : '',
+        status_c: "active",
+        posted_date_c: new Date().toISOString()
       };
 
       await jobService.create(jobData);
