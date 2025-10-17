@@ -154,6 +154,19 @@
           }
         ]
       }
+}
+  },
+  "/profile": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be logged in to view profile",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
     }
   }
 }

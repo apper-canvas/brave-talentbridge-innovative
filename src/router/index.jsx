@@ -13,6 +13,7 @@ const EmployerDashboard = lazy(() => import("@/components/pages/EmployerDashboar
 const About = lazy(() => import("@/components/pages/About"));
 const Contact = lazy(() => import("@/components/pages/Contact"));
 const NotFound = lazy(() => import("@/components/pages/NotFound"));
+const Profile = lazy(() => import("@/components/pages/Profile"));
 const Login = lazy(() => import("@/components/pages/Login"));
 const Signup = lazy(() => import("@/components/pages/Signup"));
 const Callback = lazy(() => import("@/components/pages/Callback"));
@@ -70,7 +71,8 @@ const mainRoutes = [
   createRoute({ path: "employers/post-job", element: <PostJob /> }),
   createRoute({ path: "employers/dashboard", element: <EmployerDashboard /> }),
   createRoute({ path: "about", element: <About /> }),
-  createRoute({ path: "contact", element: <Contact /> }),
+createRoute({ path: "contact", element: <Contact /> }),
+  createRoute({ path: "profile", element: <Profile /> }),
   createRoute({ path: "*", element: <NotFound /> })
 ];
 

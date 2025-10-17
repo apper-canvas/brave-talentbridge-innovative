@@ -13,12 +13,13 @@ const Header = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const { logout } = useAuth();
 
-  const navigationItems = [
+const navigationItems = [
     { name: "Home", href: "/" },
     { name: "Browse Jobs", href: "/jobs" },
     { name: "For Employers", href: "/employers" },
     { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" }
+    { name: "Contact", href: "/contact" },
+    { name: "Profile", href: "/profile" }
   ];
 
   const isActive = (href) => location.pathname === href;
