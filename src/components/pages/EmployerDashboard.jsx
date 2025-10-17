@@ -225,9 +225,11 @@ const jobApplications = getJobApplications(job.Id);
                             <ApperIcon name="DollarSign" className="h-4 w-4 mr-1" />
                             {job.salary_range_c}
                           </div>
-                          <div className="flex items-center">
+<div className="flex items-center">
                             <ApperIcon name="Calendar" className="h-4 w-4 mr-1" />
-                            Posted {formatDistanceToNow(new Date(job.posted_date_c), { addSuffix: true })}
+                            Posted {job.posted_date_c && !isNaN(new Date(job.posted_date_c).getTime()) 
+                              ? formatDistanceToNow(new Date(job.posted_date_c), { addSuffix: true })
+                              : 'No date'}
                           </div>
                         </div>
 
@@ -328,8 +330,10 @@ const jobApplications = getJobApplications(job.Id);
                               {job ? job.company_c : ""}
                             </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {formatDistanceToNow(new Date(application.submittedDate), { addSuffix: true })}
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {application.submittedDate && !isNaN(new Date(application.submittedDate).getTime())
+                              ? formatDistanceToNow(new Date(application.submittedDate), { addSuffix: true })
+                              : 'No date'}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge variant={
